@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.jjoe64.graphview.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:id="@+id/grafik"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rep_date"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/txt_add_comment"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/komentar"
+                android:padding="10dp"
+                android:textSize="20dp"
+                android:inputType="textMultiLine"
+                android:hint="@string/lbl_add_biljeska"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:id="@+id/btn_send_comment"
+                android:padding="2dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="18dp"
+                android:text="@string/btn_Send_Comment"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/colorWhite"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>

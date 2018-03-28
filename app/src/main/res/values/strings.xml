@@ -1,0 +1,126 @@
+<resources>
+    <string name="app_name">Plavi Krug</string>
+    <string name="ime">Ime</string>
+    <string name="prezime">Prezime</string>
+    <string name="pol">Pol</string>
+    <string name="tip">Dijabetes</string>
+    <string name="open">Otvori</string>
+    <string name="close">Zatvori</string>
+    <string name="nivo_secera">Nivo šećera u krvi</string>
+    <string name="mjera_gl">mmol/L</string>
+    <string name="vrijeme">Vrijeme: </string>
+    <string name="tip_mjer">Tip Mjerenja</string>
+    <string name="txt_insulin">Jedinice insulina</string>
+    <string name="btn_submit">Potvrdi</string>
+    <string name="datum_rodj">Datum rođenja</string>
+    <string name="datum_dijabetis">Od kada imate dijabetes?</string>
+    <string name="lbl_korekcija">Korekcija</string>
+    <string name="lbl_add_biljeska">Dodaj bilješku za ovaj dan...</string>
+    <string name="btn_Send_Comment">Napiši</string>
+    <string name="lbl_ili">ili</string>
+    <string name="lbl_btn_set_podsjetnik">Sačuvaj podsjetnik</string>
+    <string name="lbl_naslov">Ime podsjetnika</string>
+    <string name="add_podsjetnik">Novi podsjetnik</string>
+    <string name="add_HbA1c">Dodaj novi HbA1c test</string>
+    <string name="not_yet_registred">Niste u mogućnosti da šaljete podatke jer se još niste prijavili na sistem. Klikom na dugme prijava, vaši lični podaci će biti unijeti u sistem, i moći ćete da šaljete rezultate mjerenja svom ljekaru</string>
+    <string name="lbl_register">Prijavi se</string>
+    <string name="vas_doktor">Vaš doktor</string>
+    <string name="lbl_send">Pošalji podatke</string>
+    <string name="probaj">Probaj napuniti Plavi Krug dobrim rezultatima!</string>
+    <string name="pomoc">Pomoć?</string>
+    <string name="podsjetnikTicker">Podsjetnik: </string>
+    <string name="delete">Obriši</string>
+    <string name="dltMessage">Da li ste sigurni da želite obrisati ovaj podatak?</string>
+    <string name="da">Da</string>
+    <string name="odustani">Odustani</string>
+    <string name="lblIzmijeni">Izmijeni</string>
+    <string-array name="tipovi_mjerenja">
+        <item>Prije doručka</item>
+        <item>Poslije doručka</item>
+        <item>Prije ručka</item>
+        <item>Poslije ručka</item>
+        <item>Prije večere</item>
+        <item>Poslije večere</item>
+        <item>Tokom spavanja</item>
+        <item>Prije vježbi</item>
+        <item>Poslije vježbi</item>
+
+
+    </string-array>
+    <string name="title_activity_glavna_aktivnost">Plavi Krug</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="txt_edit_insulin">Jedinice insulina</string>
+    <string name="lbl_editKorekcija">Korekcija</string>
+    <string name="txtNaslovPomoc">Dobrodošli! Hvala Vam što koristite aplikaciju Plavog Kruga :)</string>
+    <string name="txtNadnaslovPomoc">U ovom prozoru se nalaze uputstva za korišćenje aplikacije</string>
+    <string name="txtHelpAddMjerenjeButton">Dodavanje novog mjerenja dostupno je klikom na ovo dugme, koje otvara novi prozor unutar aplikacije. Trenutno je moguće unijeti nivo šećera u krvi, primljene količine insulina..</string>
+    <string name="txtHelpPodsjetnikButton">Podsjetnike za mjerenje, ljekarske kontrole možete napraviti preko ove opcije. Aplikacija će napraviti podsjetnik, koji će vas u vidu notifikacije (obavještenja) podsjetiti na Vama važnu aktivnost, u vrijeme koje vi odredite.</string>
+    <string name="txtHelpKrug">Krug koji se nalazi u sredini početne stranice ove aplikacije, treba da predstavlja podsticaj za Vas da redovno unosite rezultate mjerenja nivoa šećera u krvi. Krug se popunjava nakon svakog unesenog rezultata, ukoliko uspijevate a bilježite rezultate unutar poželjnih granica, krug će se popunjavati brže. Krug je plave boje, i cilj je da svakog dana napravite Plavi Krug koji je simobl udruženja za Borbu protiv Dijabetesa!</string>
+    <string name="txtHelpMeni">Sličica na kojoj se nalaze tri trake, je oznaka za navigacioni meni u ovoj aplikaciji. Klikom na nju otvara se meni, koji Vam pokazuje koji su još prozori i ekrani dostupni unutar aplikacije</string>
+    <string name="txtHelpIzvjestaji">Opcija nudi trenutno izvještaj i pregled izmjerenih vrijednosti nivoa šećera u krvi za dan koji Vi odaberete</string>
+    <string name="txtHelpDnevnik">Opcija dnevnik nudi drugačiju vrstu pregleda rezultata po danu. Klikom na određeni dan, dolazi se do izvještaja za taj dan. Preko ove stranice, moguće je ažurirrati ili brisati podatke ukoliko neka od informacija koje ste unosili, greškom nije tačna. Da biste izmijenili/obrisali mjerenje, pritisnite i držite rezultat sve dok Vam ne iskoči prozor koji Vas pitate da li želite da izmiijenite podatak</string>
+    <string name="txtWelcomeMessage">Dobrodošli! Molimo Vas da popunite prijavnu formu, kako biste mogli da nastavite sa korišćenjem aplikacije. Email adresa je potrebna kako biste mogli praviti siguronosne kopije podataka, koje možete iskoristiti u slučaju gubitka ili kvara telefona da povratite podatke. Ostala polja nisu obavezna, ali mogu značiti za neke buduće analize.</string>
+    <string name="txtBackUpSyncedText">podataka je kopirano i može se povratiti u slučaju gubitka ili kvara telefona</string>
+    <string name="btnMakeBackUp">Napravi kopiju</string>
+    <string name="btnDoBackUp">Preuzmi podatke</string>
+    <string name="lblCouldntFindEmail">Da biste napravili siguronosnu kopiju Vaših podataka neophodno je da ostavite Vašu mail adresu, kako bismo Vam mogli poslati uputstva i jedinstvenu šifru za preuzimanje podataka u slučaju kvara ili gubitka telefona.</string>
+    <string name="btnSubmitSetEmail">Potvrdi</string>
+    <string name="lbl_set_email">Email</string>
+    <string name="lblBackUpInProgress">Molimo sačekajte, dok se ne napravi kopija podataka</string>
+    <string name="lblBackUpCodeText">Unesite siguronosni kod koji smo poslali na Vašu email adresu, kako biste potvrdili da je to Vaša adresa</string>
+    <string name="lblHintBackUpCode">Sigurni kod</string>
+    <string name="lblUcitavnjeBackup">Učitava se..</string>
+    <string name="msgNoInternet">Mi se trudimo koliko je moguće, ali za ovu akciju neophodno je da telefon bude povezan na internet.</string>
+    <string name="hntemailPrimjer">Email adresa: primjer@primjer.com</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lblCheckPon">Pon</string>
+    <string name="lblCheckUto">Uto</string>
+    <string name="lblCheckSri">Sri</string>
+    <string name="lblCheckČet">Čet</string>
+    <string name="lblCheckPet">Pet</string>
+    <string name="lblCheckSub">Sub</string>
+    <string name="lblCheckNeđ">Neđ</string>
+
+    <string name="Jan">Jan</string>
+    <string name="Feb">Feb</string>
+    <string name="Mar">Mar</string>
+    <string name="Apr">Apr</string>
+    <string name="Maj">Maj</string>
+    <string name="Jun">Jun</string>
+    <string name="Jul">Jul</string>
+    <string name="Avg">Avg</string>
+    <string name="Sep">Sep</string>
+    <string name="Okt">Okt</string>
+    <string name="Nov">Nov</string>
+    <string name="Dec">Dec</string>
+    <string name="Januar">Januar</string>
+    <string name="Februar">Februar</string>
+    <string name="Mart">Mart</string>
+    <string name="April">April</string>
+    <string name="Avgust">Avgust</string>
+    <string name="Septembar">Septembar</string>
+    <string name="Oktobar">Oktobar</string>
+    <string name="Novembar">Novembar</string>
+    <string name="Decembar">Decembar</string>
+    <string name="lblPodnaslovMjerenja">Nivo šećera u krvi</string>
+    <string name="lblProsjek">Prosjek</string>
+    <string name="lblMaks">Maksimum</string>
+    <string name="lblMin">Minimum</string>
+    <string name="lblPodnaslovInsulin">Primljene insulinske jedinice</string>
+    <string name="lblInsulinUkupno">Ukupno</string>
+    <string name="lblInsulinPoDanu">Prosjek po danu</string>
+    <string name="lbl_izvjestaj">Izvještaj</string>
+    <string name="parametarskiObrzac">Parametri za izvještaj</string>
+    <string name="lblZaPeriod">Za period</string>
+    <string name="lblOd">od</string>
+    <string name="lblDo">do</string>
+    <string name="txtHintDan">DD</string>
+    <string name="txtHintMjesec">MM</string>
+    <string name="txtHintGodina">GGGG</string>
+    <string name="btnPokreniIzvjestaj">Pokreni izvještaj</string>
+
+</resources>

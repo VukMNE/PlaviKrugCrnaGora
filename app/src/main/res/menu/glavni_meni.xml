@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/men_home"
+       android:title="Početna"
+       android:icon="@mipmap/ic_home"
+        />
+    <item android:id="@+id/men_izvjestaj"
+        android:title="Izvještaji"
+        android:icon="@mipmap/ic_report"
+        />
+    <item android:id="@+id/men_dnevnik"
+        android:title="Moj dnevnik"
+        android:icon="@mipmap/ic_dnevnik"
+        />
+    <item android:id="@+id/men_calendar"
+        android:title="Kalendar"
+        android:icon="@mipmap/ic_calendar"
+        />
+    <item android:id="@+id/men_HbA1c"
+        android:title="HbA1c"
+        android:icon="@mipmap/ic_teardrop"
+        />
+    <item android:id="@+id/men_backup"
+        android:title="Sigurna kopija"
+        android:icon="@mipmap/ic_backup"
+        />
+    <item android:id="@+id/men_podesavanja"
+        android:title="Podešavanja"
+        android:icon="@mipmap/ic_settings"/>
+</menu>

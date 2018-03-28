@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+        <com.jjoe64.graphview.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginLeft="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:id="@+id/grafik"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@id/grafik"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textSize="18dp"
+            android:id="@id/rep_date"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            app:layout_constraintTop_toBottomOf="@id/rep_date"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/btn_send_comment"
+            android:textSize="14dp"
+            android:text="@string/btn_Send_Comment"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorWhite"
+            />
+
+        <EditText
+            android:id="@+id/txt_add_comment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@id/grafik"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintLeft_toRightOf="@id/rep_date"
+            android:layout_marginRight="5dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/komentar"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:inputType="textMultiLine"
+            android:hint="@string/lbl_add_biljeska"
+            />
+
+
+
+    </android.support.constraint.ConstraintLayout>

@@ -1,0 +1,170 @@
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="me.plavikrug.ReportNedeljni">
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.jjoe64.graphview.GraphView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/grafikNedeljni"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="150dp"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_dolje"
+            android:id="@+id/btn_prev_week"
+            android:layout_marginBottom="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginLeft="0dp"
+            app:layout_constraintLeft_toRightOf="@id/grafikNedeljni"
+            android:clickable="true"
+            />
+
+    <TextView
+        android:id="@+id/lblDisplayedWeek"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp"
+        android:text="01 Jan - 08 Jan"
+        android:textSize="15sp"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_prev_week"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toRightOf="@id/grafikNedeljni"
+        android:layout_marginRight="0dp"
+        app:layout_constraintRight_toLeftOf="@id/chbPon"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_next_week"
+        android:textColor="@color/colorPrimary"
+        />
+    <!-->android:rotation="-90"</!-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_gore"
+            android:id="@+id/btn_next_week"
+            android:layout_marginTop="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginRight="0dp"
+            app:layout_constraintLeft_toRightOf="@id/grafikNedeljni"
+            android:clickable="true" />
+
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chbPon"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintLeft_toRightOf="@id/btn_next_week"
+            android:checked="true"
+            android:buttonTint="@color/colorPrimaryDark"
+            android:text="@string/lblCheckPon"
+            android:textColor="@color/colorPrimaryDark"
+            />
+
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chbUto"
+            android:layout_marginTop="3dp"
+            app:layout_constraintTop_toBottomOf="@id/chbPon"
+            android:layout_marginLeft="0dp"
+            app:layout_constraintLeft_toRightOf="@id/lblDisplayedWeek"
+            android:checked="true"
+            android:buttonTint="@color/colorPrimary"
+            android:text="@string/lblCheckUto"
+            android:textColor="@color/colorPrimary"
+            />
+
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chbSri"
+            android:layout_marginTop="3dp"
+            app:layout_constraintTop_toBottomOf="@id/chbUto"
+            android:layout_marginLeft="0dp"
+            app:layout_constraintLeft_toRightOf="@id/lblDisplayedWeek"
+            android:checked="true"
+            android:buttonTint="@color/colorPrimarySvjetlija"
+            android:text="@string/lblCheckSri"
+            android:textColor="@color/colorPrimarySvjetlija"
+            />
+
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chbCet"
+            android:layout_marginTop="3dp"
+            app:layout_constraintTop_toBottomOf="@id/chbSri"
+            android:layout_marginLeft="0dp"
+            app:layout_constraintLeft_toRightOf="@id/lblDisplayedWeek"
+            android:checked="true"
+            android:buttonTint="@color/colorTabBackground"
+            android:text="@string/lblCheckČet"
+            android:textColor="@color/colorTabBackground"
+            />
+
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chbPet"
+            android:layout_marginTop="3dp"
+            app:layout_constraintTop_toBottomOf="@id/chbCet"
+            android:layout_marginLeft="0dp"
+            app:layout_constraintLeft_toRightOf="@id/lblDisplayedWeek"
+            android:checked="true"
+            android:buttonTint="@color/colorGreenTransform"
+            android:text="@string/lblCheckPet"
+            android:textColor="@color/colorGreenTransform"
+            />
+
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chbSub"
+            android:layout_marginTop="3dp"
+            app:layout_constraintTop_toBottomOf="@id/chbPet"
+            android:layout_marginLeft="0dp"
+            app:layout_constraintLeft_toRightOf="@id/lblDisplayedWeek"
+            android:checked="true"
+            android:buttonTint="@color/colorGreenMiddle"
+            android:text="@string/lblCheckSub"
+            android:textColor="@color/colorGreenMiddle"
+            />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chbNeđ"
+            android:layout_marginTop="3dp"
+            app:layout_constraintTop_toBottomOf="@id/chbSub"
+            android:layout_marginLeft="0dp"
+            app:layout_constraintLeft_toRightOf="@id/lblDisplayedWeek"
+            android:checked="true"
+            android:buttonTint="@color/colorGreenFinal"
+            android:text="@string/lblCheckNeđ"
+            android:textColor="@color/colorGreenFinal"
+            />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekarc="http://schemas.android.com/apk/res-auto">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_pomoc"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="me.plavikrug.PomocActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtNaslovPomoc"
+        android:textStyle="bold"
+        android:textColor="@color/colorGrey"
+        android:text="@string/txtNaslovPomoc"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/txtNadnaslovPomoc"
+        android:text="@string/txtNadnaslovPomoc"
+        android:textColor="@color/colorGrey"
+        android:textSize="18sp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/hlp_add_button"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/zaob_dugme"
+            android:drawableLeft="@mipmap/ic_adder"
+            android:paddingLeft="2dp"
+            android:paddingTop="2dp"
+            android:paddingRight="2dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/colorWhite"
+            android:text="Dodaj rezultat mjerenja"
+            android:textAllCaps="false"
+            android:textSize="14dp"
+            android:layout_alignParentBottom="true"
+            android:singleLine="false"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtHelpAddMjerenjeButton"
+            android:text="@string/txtHelpAddMjerenjeButton"
+            android:textColor="@color/colorGrey"
+            android:textSize="18sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="Podsjetnik"
+            android:padding="15dp"
+            android:id="@+id/btn_alarm"
+            android:src="@mipmap/dod_pod"
+            android:background="@drawable/podsjetnik"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtHelpPodsjetnikButton"
+            android:layout_marginLeft="40dp"
+            android:text="@string/txtHelpPodsjetnikButton"
+            android:textColor="@color/colorGrey"
+            android:textSize="18sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/hlpSeekArcContainer"
+            android:layout_width="70dp"
+            android:layout_height="70dp" >
+
+            <com.triggertrap.seekarc.SeekArc
+                android:id="@+id/hlpSeekArc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                seekarc:startAngle="0"
+                seekarc:sweepAngle="360"
+                seekarc:arcWidth="10dp"
+                seekarc:progressColor="@color/colorPrimary"
+                seekarc:progressWidth="10dp"
+                seekarc:progress="100"
+                seekarc:enabled="false"
+                seekarc:touchInside="true"
+                />
+
+            <TextView
+                android:id="@+id/hlpSeekArcProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="100"
+                android:textSize="12sp" />
+
+
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtHelpKrug"
+            android:layout_marginLeft="50dp"
+            android:text="@string/txtHelpKrug"
+            android:textColor="@color/colorGrey"
+            android:textSize="18sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="Meni"
+            android:padding="15dp"
+            android:id="@+id/hlpMeni"
+            android:src="@mipmap/ic_meni"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtHelpMeni"
+            android:layout_marginLeft="40dp"
+            android:text="@string/txtHelpMeni"
+            android:textColor="@color/colorGrey"
+            android:textSize="18sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="HelpIzvještaji"
+            android:padding="15dp"
+            android:id="@+id/hlpIzvjestaji"
+            android:src="@mipmap/ic_report"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtHelpIzvjestaji"
+            android:layout_marginLeft="40dp"
+            android:text="@string/txtHelpIzvjestaji"
+            android:textColor="@color/colorGrey"
+            android:textSize="18sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="HelpDnevnik"
+            android:padding="15dp"
+            android:id="@+id/hlpDnevnik"
+            android:src="@mipmap/ic_dnevnik"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtHelpDnevnik"
+            android:layout_marginLeft="40dp"
+            android:text="@string/txtHelpDnevnik"
+            android:textColor="@color/colorGrey"
+            android:textSize="18sp"
+            />
+    </LinearLayout>
+
+</LinearLayout>
+
+</ScrollView>

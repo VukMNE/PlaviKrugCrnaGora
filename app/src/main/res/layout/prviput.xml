@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtWelcomeMessage"
+            android:text="@string/txtWelcomeMessage"
+            android:textSize="16sp"
+            >
+
+        </TextView>
+        <!-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_ime"
+                android:hint="@string/ime"
+                android:textSize="20sp"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_prezime"
+                android:hint="@string/prezime"
+                android:textSize="20sp"
+                />
+
+        </LinearLayout>
+        </!-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_email"
+                android:hint="@string/hntemailPrimjer"
+                android:textSize="20sp"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lbl_pol"
+                android:text="@string/pol"
+                android:textSize="20sp"
+                />
+            <Switch
+                android:id="@+id/switch_pol"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_weight="0.01"
+                android:paddingRight="80dp"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:showText="true"
+                android:soundEffectsEnabled="true"
+                android:switchMinWidth="45dp"
+                android:textColorLink="@color/colorPrimary"
+                android:textOff="Muški"
+                android:textOn="Ženski" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lbl_tip"
+                android:text="@string/tip"
+                android:textSize="20dp"
+                />
+            <Switch
+                android:id="@+id/switch_tip"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_weight="0.03"
+                android:paddingRight="80dp"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:showText="true"
+                android:soundEffectsEnabled="true"
+                android:switchMinWidth="45dp"
+                android:textColorLink="@color/colorPrimary"
+                android:textOff="Tip 2"
+                android:textOn="Tip 1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lbl_datum_rodjenja"
+                android:text="@string/datum_rodj"
+                />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/date_birth"
+                android:text="1.1.1990"
+                android:layout_marginLeft="61dp"
+                >
+
+            </Button>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lbl_datum_dijabetisa"
+                android:text="@string/datum_dijabetis"
+                />
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/date_diabetes"
+                android:text="1.9.2016"
+                >
+
+            </Button>
+
+
+        </LinearLayout>
+
+        <Button
+            android:text="Potvrdi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:id="@+id/btn_conf_firstTimer"
+            />
+
+    </LinearLayout>
+</ScrollView>

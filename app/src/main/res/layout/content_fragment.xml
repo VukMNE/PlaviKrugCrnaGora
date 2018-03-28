@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:seekarc="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="9dp"
+    android:layout_alignParentBottom="true">
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/probaj"
+            android:text="@string/probaj"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:background="@color/subColor"
+            android:id="@+id/pomoc"
+            android:padding="5dp"
+            android:text="@string/pomoc"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            />
+
+
+        <FrameLayout
+            android:id="@+id/seekArcContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+        <com.triggertrap.seekarc.SeekArc
+            android:id="@+id/seekArc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:padding="30dp"
+            seekarc:startAngle="0"
+            seekarc:sweepAngle="360"
+            seekarc:arcWidth="20dp"
+            seekarc:progressColor="@color/colorPrimary"
+            seekarc:progressWidth="20dp"
+            seekarc:progress="0"
+            seekarc:enabled="false"
+            seekarc:touchInside="true"
+            />
+
+                <TextView
+                    android:id="@+id/seekArcProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="64"
+                    android:textSize="40sp" />
+
+
+
+        </FrameLayout>
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="Podsjetnik"
+            android:padding="15dp"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/btn_alarm"
+            android:src="@mipmap/dod_pod"
+            android:background="@drawable/podsjetnik"
+            android:layout_alignParentBottom="true"
+            />
+
+        <Button
+            android:id="@+id/add_button"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/zaob_dugme"
+            android:drawableLeft="@mipmap/ic_adder"
+            android:paddingLeft="2dp"
+            android:paddingTop="2dp"
+            android:paddingRight="2dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/colorWhite"
+            android:text="Dodaj rezultat mjerenja"
+            android:textAllCaps="false"
+            android:textSize="20dp"
+            android:layout_alignParentBottom="true"
+            android:singleLine="false"
+            />
+
+</RelativeLayout>

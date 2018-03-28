@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lblBackUpCodeText"
+        android:layout_alignParentTop="true"
+        android:text="@string/lblBackUpCodeText"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop = "20dp"
+        />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:id="@+id/txtBackUpCode"
+        android:layout_below="@id/lblBackUpCodeText"
+        android:background="@drawable/komentar"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/lblHintBackUpCode"
+        android:layout_marginBottom="20dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSubmitCode"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/txtBackUpCode"
+        android:text="@string/btn_submit"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lblUcitavnjeBackup"
+        android:layout_below="@id/btnSubmitCode"
+        android:text="@string/lblUcitavnjeBackup"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        />
+
+    <ProgressBar
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:id="@+id/backUpRecieveProgress"
+        android:layout_below="@id/lblUcitavnjeBackup"
+        android:layout_centerHorizontal="true"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:visibility="invisible"
+        />
+
+</RelativeLayout>
