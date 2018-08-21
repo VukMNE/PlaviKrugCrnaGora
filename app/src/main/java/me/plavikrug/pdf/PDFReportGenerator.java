@@ -14,6 +14,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
 
@@ -31,6 +32,8 @@ import java.util.Date;
 import java.util.StringTokenizer;
 
 import me.plavikrug.AsyncResponse;
+import me.plavikrug.BuildConfig;
+import me.plavikrug.PDFReportPopUpWindow;
 import me.plavikrug.R;
 import me.plavikrug.model.PDFParameters;
 
@@ -113,7 +116,7 @@ public class PDFReportGenerator extends AsyncTask<PDFParameters,Void, Uri>{
             if (!folder.exists()) {
                 success = folder.mkdir();
             }
-            File outputFile = new File("/sdcard/PlaviKrug/", pdfName);
+            File outputFile = new File(folder, pdfName);
 
             try {
                 outputFile.createNewFile();
@@ -121,8 +124,9 @@ public class PDFReportGenerator extends AsyncTask<PDFParameters,Void, Uri>{
                 doc.writeTo(out);
                 doc.close();
                 out.close();
-                String uspjeh = "/sdcard/PlaviKrug/" + pdfName;
-                return Uri.fromFile(outputFile);
+                return FileProvider.getUriForFile(PDFReportPopUpWindow.context,
+                        BuildConfig.APPLICATION_ID + ".provider",
+                        outputFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }

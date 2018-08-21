@@ -23,7 +23,6 @@ import java.util.Locale;
  */
 
 public class ContentFragment extends Fragment {
-    private ImageView btnAlarm;
     private Button btnAdd;
     private SeekArc seekArc;
     private TextView seekArcProgress;
@@ -44,7 +43,6 @@ public class ContentFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Plavi Krug");
-        btnAlarm = (ImageView) view.findViewById(R.id.btn_alarm);
         btnAdd = (Button) view.findViewById(R.id.add_button);
         seekArc = (SeekArc) view.findViewById(R.id.seekArc);
         seekArcProgress = (TextView) view.findViewById(R.id.seekArcProgress);
@@ -106,14 +104,6 @@ public class ContentFragment extends Fragment {
             }
         });
 
-        btnAlarm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent addAlarmIntent = new Intent(getActivity(), PodsjetniciLista.class);
-                startActivity(addAlarmIntent);
-                getActivity().finish();
-            }
-        });
 
         pomoc.setOnClickListener(new View.OnClickListener() {
             @Override

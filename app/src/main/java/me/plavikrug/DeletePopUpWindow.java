@@ -48,11 +48,6 @@ public class DeletePopUpWindow extends Activity {
                 dataBaseSource.open();
                 dataBaseSource.delete(tabela, id);
                 dataBaseSource.close();
-                if(tabela.equals("Podsjetnik")){
-                    Intent newIntent = new Intent(DeletePopUpWindow.this, PodsjetniciLista.class);
-                    newIntent.putExtra("usp_poruka","Podsjetnik je obrisan!");
-                    startActivity(newIntent);
-                }
                 if(tabela.equals("HbA1c")){
                     Intent newIntent = new Intent(DeletePopUpWindow.this, GlavnaAktivnost.class);
                     newIntent.putExtra("usp_poruka","HbA1c");

@@ -1,7 +1,10 @@
 package me.plavikrug;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.pdf.PdfDocument;
@@ -9,6 +12,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +32,7 @@ import me.plavikrug.pdf.PDFReportGenerator;
 import me.plavikrug.utils.UniversalTextWatcher;
 
 public class PDFReportPopUpWindow extends Activity implements AsyncResponse {
+    public static Context context;
     String fullDatum;
     EditText txtOdDan;
     EditText txtOdMjesec;
@@ -42,12 +49,13 @@ public class PDFReportPopUpWindow extends Activity implements AsyncResponse {
 
 
     int danOd, mjesecOd, godinaOd, danDo, mjesecDo, godinaDo;
+    int REQUEST_STORAGE = 2028;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pdf_report_pop_up_window);
-
+        context = PDFReportPopUpWindow.this;
         //Podesavanje velicine prozora
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -97,17 +105,27 @@ public class PDFReportPopUpWindow extends Activity implements AsyncResponse {
 
                 Cursor podaci = dbSource.getPDFReportMjerenja(danOdParam,danDoParam);
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    PdfDocument doc = new PdfDocument();
+
+                    if (ContextCompat.checkSelfPermission(PDFReportPopUpWindow.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(PDFReportPopUpWindow.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        // Permission is not granted
+                        ActivityCompat.requestPermissions(PDFReportPopUpWindow.this,
+                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
+                                REQUEST_STORAGE);
+                    }
+                    else {
+                        PdfDocument doc = new PdfDocument();
 
                         Resources resursi = getResources();
                         //SharedPreferences korisnickiPodaci = getActivity().getSharedPreferences("PODACI", Context.MODE_PRIVATE);
                         PDFParameters pdfParameters = new PDFParameters(doc, resursi, podaci, danOdParam, danDoParam);
                         pdfGen.execute(pdfParameters);
-
+                    }
                 }
 
                 else{
-                    Toast.makeText(getApplicationContext(), "Žao nam je, ali ne može.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Žao nam je, ali izvještaj nije moguće pokrenuti na ovom uređaju.", Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -224,6 +242,11 @@ public class PDFReportPopUpWindow extends Activity implements AsyncResponse {
         return focusChangeListener;
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Log.d("VUK", "Kod: " + requestCode);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 
     @Override
     public void processFinish(String[] output) throws JSONException {
@@ -235,7 +258,9 @@ public class PDFReportPopUpWindow extends Activity implements AsyncResponse {
         if(uri != null){
             Intent viewPdf = new Intent(Intent.ACTION_VIEW);
             viewPdf.setDataAndType(uri, "application/pdf");
-            viewPdf.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            viewPdf.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            viewPdf.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            viewPdf.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             if(viewPdf.resolveActivity(getPackageManager()) != null) {
                 startActivity(viewPdf);
             }

@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "26.0.2"
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "me.plavikrug"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 13
-        versionName "1.1.0"
+        versionCode 14
+        versionName "1.1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -20,17 +20,17 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.jjoe64:graphview:4.2.1'
-    compile 'com.android.support:design:25.3.1'
-    compile 'de.hdodenhof:circleimageview:2.1.0'
-    compile 'com.github.Triggertrap:SeekArc:v1.1'
-    compile 'com.firebase:firebase-jobdispatcher:0.5.0'
-    compile 'joda-time:joda-time:2.9.4'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:25.3.1'
+    implementation 'com.jjoe64:graphview:4.2.1'
+    implementation 'com.android.support:design:25.3.1'
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
+    implementation 'com.github.Triggertrap:SeekArc:v1.1'
+    implementation 'com.firebase:firebase-jobdispatcher:0.5.0'
+    implementation 'joda-time:joda-time:2.9.4'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
 }

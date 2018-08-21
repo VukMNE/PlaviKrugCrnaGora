@@ -64,17 +64,7 @@
 
 
         </FrameLayout>
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:contentDescription="Podsjetnik"
-            android:padding="15dp"
-            android:layout_alignParentLeft="true"
-            android:id="@+id/btn_alarm"
-            android:src="@mipmap/dod_pod"
-            android:background="@drawable/podsjetnik"
-            android:layout_alignParentBottom="true"
-            />
+
 
         <Button
             android:id="@+id/add_button"

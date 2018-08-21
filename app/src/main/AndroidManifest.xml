@@ -39,8 +39,6 @@
             android:label="@string/title_activity_glavna_aktivnost"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Podsjetnik" />
-        <activity android:name=".PodsjetniciLista" />
         <activity android:name=".HbA1cInsert" />
         <activity
             android:name=".DeletePopUpWindow"
@@ -54,13 +52,6 @@
         <activity
             android:name=".PDFReportPopUpWindow"
             android:theme="@style/AppTheme.PopUpWindow"/>
-        <service
-            android:name=".NotificationPrijemnik"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
-            </intent-filter>
-        </service>
 
         <activity android:name=".BackUpActivity" />
         <activity
@@ -71,6 +62,16 @@
             android:parentActivityName=".GlavnaAktivnost"/>
         <activity android:name=".VerifyEmail"
             android:theme="@style/AppTheme.PopUpWindow"/>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="me.plavikrug.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
     </application>
 
 </manifest>
