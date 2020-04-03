@@ -9,7 +9,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,6 +26,8 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Locale;
+
+import me.plavikrug.db.DataBaseSource;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
@@ -168,10 +169,9 @@ public class DodajMjerenje extends AppCompatActivity {
             public void onClick(View v) {
 
                 DatePickerDialog datumDialog = new DatePickerDialog(DodajMjerenje.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        R.style.Theme_DelegateWindow,
                         datumListener,
                         godina,mjesec-1,dan);
-                datumDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 datumDialog.setTitle("Datum");
                 datumDialog.setButton(datumDialog.BUTTON_POSITIVE,"U redu",datumDialog);
                 datumDialog.setButton(datumDialog.BUTTON_NEGATIVE,"Otkaži",datumDialog);
@@ -204,6 +204,7 @@ public class DodajMjerenje extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TimePickerDialog vrijemeDialog = new TimePickerDialog(DodajMjerenje.this,
+                        R.style.Theme_DelegateWindow,
                         vrijemeListener,sat,minut,true);
                 vrijemeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 vrijemeDialog.setTitle("Vrijeme");

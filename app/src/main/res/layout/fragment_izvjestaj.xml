@@ -18,7 +18,7 @@
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabLayout"
-                android:background="@color/colorTabBackground"
+                android:background="@color/colorPrimaryDark"
                 app:tabTextColor="@color/colorTabBackgroundLight"
                 app:tabSelectedTextColor="@color/colorWhite"
                 app:tabIndicatorHeight="3dp"

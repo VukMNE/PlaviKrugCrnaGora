@@ -9,7 +9,6 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,6 +26,7 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.Calendar;
 
+import me.plavikrug.db.DataBaseSource;
 import me.plavikrug.model.PDFParameters;
 import me.plavikrug.pdf.PDFReportGenerator;
 import me.plavikrug.utils.UniversalTextWatcher;

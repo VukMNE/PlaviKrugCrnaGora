@@ -2,7 +2,6 @@ package me.plavikrug;
 
 import android.content.res.Configuration;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,6 +22,8 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.Calendar;
 import java.util.Locale;
+
+import me.plavikrug.db.DataBaseSource;
 
 /**
  * Created by Vuk on 14.1.2018..

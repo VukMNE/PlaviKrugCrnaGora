@@ -29,6 +29,8 @@ import com.jjoe64.graphview.series.PointsGraphSeries;
 import java.util.Calendar;
 import java.util.Locale;
 
+import me.plavikrug.db.DataBaseSource;
+
 /**
  * Created by Vuk on 31.7.2017..
  */
@@ -140,10 +142,9 @@ public class ReportDnevni extends Fragment {
             public void onClick(View v) {
 
                 DatePickerDialog datumDialog = new DatePickerDialog(getContext(),
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        R.style.Theme_DelegateWindow,
                         datumListener,
                         godina,mjesec-1,dan);
-                datumDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 datumDialog.setTitle("Datum");
                 datumDialog.setButton(datumDialog.BUTTON_POSITIVE,"U redu",datumDialog);
                 datumDialog.setButton(datumDialog.BUTTON_NEGATIVE,"Otkaži",datumDialog);

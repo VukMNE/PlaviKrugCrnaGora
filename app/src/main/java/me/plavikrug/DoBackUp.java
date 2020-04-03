@@ -11,12 +11,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+
+import me.plavikrug.db.DataBaseSource;
 
 public class DoBackUp extends AppCompatActivity implements AsyncResponse {
 
@@ -26,6 +36,9 @@ public class DoBackUp extends AppCompatActivity implements AsyncResponse {
     private TextView lblBackUpProgress;
     private ProgressBar progressBar;
     private Handler mHandler = new Handler();
+    private RequestQueue mRequestQueue;
+    String apiBaseUrl = "http://80.211.160.9/backend/api/";
+
 
     private int progress;
 
@@ -34,6 +47,7 @@ public class DoBackUp extends AppCompatActivity implements AsyncResponse {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_do_back_up);
+        mRequestQueue = Volley.newRequestQueue(this);
         lblBackUpProgress = (TextView) findViewById(R.id.lblBackUpInProgress);
         progressBar = (ProgressBar) findViewById(R.id.backUpProgress);
         progressBar.getProgressDrawable().setColorFilter(
@@ -43,11 +57,12 @@ public class DoBackUp extends AppCompatActivity implements AsyncResponse {
         swp.delegate = this;
         progress = 0;
 
-            try {
-                swp.execute(podaci.getInt("id", 0)+"==="+podaci.getString("email", ""),kopirajSvePodatke().toString());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+        try {
+            mRequestQueue.add(kopirajSvePodatke());
+            //swp.execute(podaci.getInt("id", 0)+"==="+podaci.getString("email", ""),kopirajSvePodatke().toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -59,30 +74,7 @@ public class DoBackUp extends AppCompatActivity implements AsyncResponse {
             editor.putInt("id", Integer.parseInt(output[0]));
             editor.commit();
         }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(progress < 100){
-                    progress++;
-                    android.os.SystemClock.sleep(10);
-                    mHandler.post( new Runnable(){
-                        @Override
-                        public void run() {
-                            progressBar.setProgress(progress);
-                        }
-                    });
-                }
 
-                mHandler.post( new Runnable(){
-                    @Override
-                    public void run() {
-                        lblBackUpProgress.setText("Pravljenje siguronosne kopije je uspješno završeno!");
-                        android.os.SystemClock.sleep(500);
-                        onBackPressed();
-                    }
-                });
-            }
-        }).start();
 
     }
 
@@ -98,12 +90,20 @@ public class DoBackUp extends AppCompatActivity implements AsyncResponse {
         finish();
     }
 
-    private JSONObject kopirajSvePodatke() throws JSONException {
-        JSONObject json = new JSONObject();
-        JSONArray jsonMjerenja = new JSONArray();
-        JSONArray jsonTerapija = new JSONArray();
-        JSONArray jsonBiljeske = new JSONArray();
+    private JsonObjectRequest kopirajSvePodatke() throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("email", podaci.getString("email", ""));
+        jsonObject.put("gender", podaci.getString("pol", ""));
+        jsonObject.put("typeDiabetes", podaci.getInt("tip", 0));
+        jsonObject.put("dateOfBirth", podaci.getString("datum_rodj", ""));
+        jsonObject.put("dateOfDiabetes", podaci.getString("datum_d", ""));
+        jsonObject.put("id", podaci.getInt("id", 0));
+        jsonObject.put("verificationCode", Integer.parseInt(podaci.getString("vCode", "")));
 
+
+        JSONArray jsonMeasurements = new JSONArray();
+        JSONArray jsonTherapy = new JSONArray();
+        JSONArray jsonNotes = new JSONArray();
 
 
         dbSource = new DataBaseSource(this);
@@ -114,12 +114,14 @@ public class DoBackUp extends AppCompatActivity implements AsyncResponse {
         int ind = 0;
         while(!mjerenjaCursor.isAfterLast()){
             JSONObject currMjer = new JSONObject();
-            currMjer.put("vrijeme", mjerenjaCursor.getString(0));
-            currMjer.put("atr_id_atr", mjerenjaCursor.getInt(2));
-            currMjer.put("tip_mj", mjerenjaCursor.getInt(3));
-            currMjer.put("izmjereno", mjerenjaCursor.getDouble(1));
+            currMjer.put("id", mjerenjaCursor.getInt(0));
+            currMjer.put("datetime", mjerenjaCursor.getString(1));
+            currMjer.put("measuredValue", mjerenjaCursor.getFloat(2));
+            currMjer.put("attributeId", mjerenjaCursor.getInt(3));
+            currMjer.put("typeOfMeasure", mjerenjaCursor.getInt(4));
+            currMjer.put("backedUp", true);
 
-            jsonMjerenja.put(ind, currMjer);
+            jsonMeasurements.put(ind, currMjer);
             ind++;
             mjerenjaCursor.moveToNext();
         }
@@ -130,12 +132,15 @@ public class DoBackUp extends AppCompatActivity implements AsyncResponse {
         int tind = 0;
         while(!terapijaCursor.isAfterLast()){
             JSONObject currTer = new JSONObject();
-            currTer.put("dat_vrijem", terapijaCursor.getString(3));
-            currTer.put("jed_insl", terapijaCursor.getInt(0));
-            currTer.put("jed_kor", terapijaCursor.getInt(1));
-            currTer.put("poz_prijem_ter", terapijaCursor.getInt(2));
+            currTer.put("id", terapijaCursor.getInt(0));
+            currTer.put("insulinUnits", terapijaCursor.getInt(1));
+            currTer.put("correctionUnits", terapijaCursor.getInt(2));
+            currTer.put("bodyEntryPosition", terapijaCursor.getInt(3));
+            currTer.put("date", terapijaCursor.getString(4));
+            currTer.put("time", terapijaCursor.getString(5));
+            currTer.put("backedUp", true);
 
-            jsonTerapija.put(tind, currTer);
+            jsonTherapy.put(tind, currTer);
             tind++;
             terapijaCursor.moveToNext();
         }
@@ -145,10 +150,13 @@ public class DoBackUp extends AppCompatActivity implements AsyncResponse {
         int bInd = 0;
         while(!biljeskeCursor.isAfterLast()){
             JSONObject currBiljeska = new JSONObject();
-            currBiljeska.put("biljeska", biljeskeCursor.getString(0));
-            currBiljeska.put("datum", biljeskeCursor.getString(1));
+            currBiljeska.put("id", biljeskeCursor.getInt(0));
+            currBiljeska.put("noteText", biljeskeCursor.getString(1));
+            currBiljeska.put("date", biljeskeCursor.getString(2));
+            currBiljeska.put("backedUp", true);
 
-            jsonBiljeske.put(bInd, currBiljeska);
+
+            jsonNotes.put(bInd, currBiljeska);
             bInd++;
             biljeskeCursor.moveToNext();
 
@@ -156,10 +164,54 @@ public class DoBackUp extends AppCompatActivity implements AsyncResponse {
 
         dbSource.markAllBackedUp();
 
-        json.put("mjerenja", jsonMjerenja);
-        json.put("terapija", jsonTerapija);
-        json.put("biljeske", jsonBiljeske);
+        jsonObject.put("measurements", jsonMeasurements);
+        jsonObject.put("therapy", jsonTherapy);
+        jsonObject.put("notes", jsonNotes);
         dbSource.close();
-        return json;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.PUT,
+                apiBaseUrl + "user-data-backup",
+                jsonObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                while(progress < 100){
+                                    progress++;
+                                    android.os.SystemClock.sleep(10);
+                                    mHandler.post( new Runnable(){
+                                        @Override
+                                        public void run() {
+                                            progressBar.setProgress(progress);
+                                        }
+                                    });
+                                }
+
+                                mHandler.post( new Runnable(){
+                                    @Override
+                                    public void run() {
+                                        lblBackUpProgress.setText("Pravljenje siguronosne kopije je uspješno završeno!");
+                                        android.os.SystemClock.sleep(500);
+                                        onBackPressed();
+                                    }
+                                });
+                            }
+                        }).start();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("AJMO_PLAVI", "Greska: " + error.getMessage());
+                error.printStackTrace();
+                Toast.makeText(DoBackUp.this, "Dogodila se greška!", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        );
+
+        return jsonObjectRequest;
     }
 }

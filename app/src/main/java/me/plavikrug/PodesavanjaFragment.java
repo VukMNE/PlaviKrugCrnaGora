@@ -7,19 +7,23 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Switch;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.regex.Matcher;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.content.Context.MODE_PRIVATE;
 import static me.plavikrug.SetEmailPopUpWindow.VALID_EMAIL_ADDRESS_REGEX;
@@ -33,34 +37,33 @@ public class PodesavanjaFragment extends Fragment {
     SharedPreferences podaci;
     SharedPreferences.Editor editor;
 
-    CircleImageView imgJa;
     TextView lblEmail;
-    TextView lblSetIme;
-    TextView lblSetPrezime;
     TextView lblSetPol;
     TextView lblSetTip;
     TextView lblSetDatumRodj;
     TextView lblSetDatumDia;
 
-    EditText txtSetIme;
-    EditText txtSetPrezime;
-    EditText txtSetEmail;
+    Button btnConf;
+    Button btnCancel;
 
-    Switch swSetPol;
-    Switch swSetTip;
+
+    EditText txtSetEmail;
+    private RadioButton radioMale;
+    private RadioButton radioFemale;
+    private Spinner selectTypeDiabetes;
 
     Button btnSetDatumRodj;
     Button btnSetDatumDia;
-    Button btnUpdateSettings;
+    Button btnGoToUpdateSettings;
+    ImageView imgEdit;
 
     DatePickerDialog.OnDateSetListener datumRodjListener;
-    DatePickerDialog.OnDateSetListener datumDiabListener;
-
-
-
-    private DatePickerDialog.OnDateSetListener dateBirthListener;
-    private DatePickerDialog.OnDateSetListener dateDiabetesListener;
+    DatePickerDialog.OnDateSetListener dateDiabetesListener;
     int godina_r, mjesec_r, dan_r, godina_d, mjesec_d, dan_d;
+
+    Animation fadeOutAnimation, fadeInAnimation;
+
+    private String TAG = "AJMO_PLAVI";
 
     @Nullable
     @Override
@@ -71,29 +74,35 @@ public class PodesavanjaFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         //Poveyivanje layouta sa kontroloma na ekranu
-        getActivity().setTitle("Podešavanja");
         podaci = this.getActivity().getSharedPreferences("PODACI", MODE_PRIVATE);
         editor = podaci.edit();
 
-        imgJa = (CircleImageView) view.findViewById(R.id.imgJa);
-        btnUpdateSettings = (Button) view.findViewById(R.id.btnUpdateSettings);
+        btnGoToUpdateSettings = (Button) view.findViewById(R.id.btnUpdateSettings);
+        imgEdit = (ImageView) view.findViewById(R.id.li_set_edit_img);
         lblEmail = (TextView) view.findViewById(R.id.lbl_set_email);
         txtSetEmail = (EditText) view.findViewById(R.id.txt_set_email);
-        /*lblSetIme = (TextView) view.findViewById(R.id.lbl_set_ime);
-        lblSetPrezime = (TextView) view.findViewById(R.id.lbl_set_prezime);*/
-        lblSetPol = (TextView) view.findViewById(R.id.lbl_set_pol);
-        lblSetTip = (TextView) view.findViewById(R.id.lbl_set_tip);
-        lblSetDatumRodj = (TextView) view.findViewById(R.id.lbl_set_datum_rodjenja);
-        lblSetDatumDia = (TextView) view.findViewById(R.id.lbl_set_datum_dijabetisa);
+        lblSetPol = (TextView) view.findViewById(R.id.lbl_set_gender);
+        lblSetTip = (TextView) view.findViewById(R.id.lbl_tip_diabetes);
+        lblSetDatumRodj = (TextView) view.findViewById(R.id.lbl_date_of_birth);
+        lblSetDatumDia = (TextView) view.findViewById(R.id.lbl_date_diabetes);
 
-        /*txtSetIme = (EditText) view.findViewById(R.id.txt_set_ime);
-        txtSetPrezime = (EditText) view.findViewById(R.id.txt_set_prezime);*/
+        radioMale = (RadioButton) view.findViewById(R.id.gender_male);
+        radioFemale = (RadioButton) view.findViewById(R.id.gender_female);
 
-        swSetPol = (Switch) view.findViewById(R.id.switch_set_pol);
-        swSetTip = (Switch) view.findViewById(R.id.switch_set_tip);
+        btnConf = (Button) view.findViewById(R.id.btn_set_confirm);
+        btnCancel = (Button) view.findViewById(R.id.btn_set_skip);
 
-        btnSetDatumRodj = (Button) view.findViewById(R.id.date_set_birth);
-        btnSetDatumDia = (Button) view.findViewById(R.id.date_set_diabetes);
+        selectTypeDiabetes = (Spinner) view.findViewById(R.id.spinner_tip_diabetes);
+
+        /*Setting up the adapter for spiner*/
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.arr_diabetes_types, android.R.layout.simple_spinner_dropdown_item);
+        //Setting up the drop-down view
+        selectTypeDiabetes.setAdapter(adapter);
+
+
+        btnSetDatumRodj = (Button) view.findViewById(R.id.btn_date_of_birth);
+        btnSetDatumDia = (Button) view.findViewById(R.id.btn_date_diabetes);
 
         //Upisivanje ranije sačuvanih osnovnih podataka o korisniku
 
@@ -103,24 +112,31 @@ public class PodesavanjaFragment extends Fragment {
         boolean pol,tip;
 
         if(podaci.getString("pol","").equals("Muški")){
-            pol = false;
+            radioMale.setChecked(true);
+            radioFemale.setChecked(false);
         }
         else{
-            pol = true;
-        }
-        if(podaci.getInt("tip",0)==1){
-            tip = true;
-        }
-        else{
-            tip = false;
+            radioMale.setChecked(false);
+            radioFemale.setChecked(true);
         }
 
+        selectTypeDiabetes.setSelection(podaci.getInt("tip", 0));
 
-        swSetPol.setChecked(pol);
-        swSetTip.setChecked(tip);
+        btnSetDatumRodj.setText(podaci.getString("datum_rodj","01.01.1990"));
+        btnSetDatumDia.setText(podaci.getString("datum_d","01.09.2016"));
 
-        btnSetDatumRodj.setText(podaci.getString("datum_rodj","1.1.1990"));
-        btnSetDatumDia.setText(podaci.getString("datum_d","1.9.2016"));
+        Log.d(TAG, "Datum rodjenja: " +  podaci.getString("datum_rodj","01.01.1990"));
+        Log.d(TAG, "Datum dijabetes: " +  podaci.getString("datum_d","01.09.2016"));
+
+
+        dan_r = Integer.parseInt(podaci.getString("datum_rodj","01.01.1990").substring(0,2));
+        mjesec_r = Integer.parseInt(podaci.getString("datum_rodj","01.01.1990").substring(3,5));
+        godina_r = Integer.parseInt(podaci.getString("datum_rodj","01.01.1990").substring(6));
+
+        dan_d = Integer.parseInt(podaci.getString("datum_d","01.01.1990").substring(0,2));
+        mjesec_d = Integer.parseInt(podaci.getString("datum_d","01.01.1990").substring(3,5));
+        godina_d = Integer.parseInt(podaci.getString("datum_d","01.01.1990").substring(6));
+
 
         //Omogucavanja odabira datuma rodjenja
         btnSetDatumRodj.setOnClickListener(new View.OnClickListener() {
@@ -128,10 +144,9 @@ public class PodesavanjaFragment extends Fragment {
             public void onClick(View v) {
 
                 DatePickerDialog dateBirthDialog = new DatePickerDialog(getContext(),
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        dateBirthListener,
+                        R.style.Theme_DelegateWindow,
+                        datumRodjListener,
                         godina_r,mjesec_r-1,dan_r);
-                dateBirthDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dateBirthDialog.setTitle("Datum rođenja");
                 dateBirthDialog.setButton(dateBirthDialog.BUTTON_POSITIVE,"U redu",dateBirthDialog);
                 dateBirthDialog.setButton(dateBirthDialog.BUTTON_NEGATIVE,"Otkaži",dateBirthDialog);
@@ -145,7 +160,18 @@ public class PodesavanjaFragment extends Fragment {
                 godina_r = year;
                 mjesec_r = month+1;
                 dan_r = dayOfMonth;
-                btnSetDatumRodj.setText(dayOfMonth+"."+(month+1)+"."+year);
+                String danStr, mjesecStr;
+                danStr = dan_r + "";
+                mjesecStr = mjesec_r + "";
+
+                if(dan_r < 10) {
+                    danStr = "0" + dan_r;
+                }
+                if(mjesec_r < 10) {
+                    mjesecStr = "0" + mjesec_r;
+                }
+
+                btnSetDatumRodj.setText(danStr+"."+mjesecStr+"."+year);
 
             }
         };
@@ -154,10 +180,9 @@ public class PodesavanjaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 DatePickerDialog dateDiabetesDialog = new DatePickerDialog(getContext(),
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        R.style.Theme_DelegateWindow,
                         dateDiabetesListener,
                         godina_d,mjesec_d-1,dan_d);
-                dateDiabetesDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dateDiabetesDialog.setTitle("Od kojeg datuma imate dijabetis?");
                 dateDiabetesDialog.setButton(dateDiabetesDialog.BUTTON_POSITIVE,"U redu",dateDiabetesDialog);
                 dateDiabetesDialog.setButton(dateDiabetesDialog.BUTTON_NEGATIVE,"Otkaži",dateDiabetesDialog);
@@ -171,77 +196,66 @@ public class PodesavanjaFragment extends Fragment {
                 godina_d = year;
                 mjesec_d = month+1;
                 dan_d = dayOfMonth;
-                btnSetDatumDia.setText(dayOfMonth+"."+(month+1)+"."+year);
+                String danStr, mjesecStr;
+                danStr = dan_d + "";
+                mjesecStr = mjesec_d + "";
+
+                if(dan_d < 10) {
+                    danStr = "0" + dan_d;
+                }
+                if(mjesec_d < 10) {
+                    mjesecStr = "0" + mjesec_d;
+                }
+
+                btnSetDatumDia.setText(danStr+"."+mjesecStr+"."+year);
             }
         };
 
 
+        fadeOutAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_out);
+        fadeInAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+
+        fadeInAnimation.setDuration(500);
+        fadeOutAnimation.setDuration(500);
 
 
 
-        btnUpdateSettings.setOnClickListener(new View.OnClickListener() {
+        btnGoToUpdateSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String labela = btnUpdateSettings.getText().toString();
 
-                switch(labela.toUpperCase()){
-                    case "IZMIJENI":
-                        /*txtSetIme.setEnabled(true);
-                        txtSetPrezime.setEnabled(true);*/
-                        swSetPol.setEnabled(true);
-                        swSetTip.setEnabled(true);
-                        if(podaci.getInt("status",0) == 0) {
-                            txtSetEmail.setEnabled(true);
-                        }
-                        btnSetDatumRodj.setEnabled(true);
-                        btnSetDatumDia.setEnabled(true);
-                        btnUpdateSettings.setText("SAČUVAJ");
-                        break;
-                    case "SAČUVAJ":
-                        if(validate(txtSetEmail.getText().toString())) {
-                        /*txtSetIme.setEnabled(false);
-                        txtSetPrezime.setEnabled(false);*/
-                        txtSetEmail.setEnabled(false);
-                        swSetPol.setEnabled(false);
-                        swSetTip.setEnabled(false);
-                        btnSetDatumRodj.setEnabled(false);
-                        btnSetDatumDia.setEnabled(false);
-                        btnUpdateSettings.setText("IZMIJENI");
-
-                        //Upisivanje novih vrijednosti u podešavanja
-                        /*editor.putString("ime",txtSetIme.getText().toString());
-                        editor.putString("prezime",txtSetPrezime.getText().toString());*/
-                        String polP;
-                        int tipP;
-                        if(swSetPol.isChecked()){
-                             polP = "Ženski";
-                        }
-                        else{
-                             polP = "Muški";
-                        }
-                        if(swSetTip.isChecked()){
-                            tipP = 1;
-                        }
-                        else{
-                            tipP = 2;
-                        }
-
-                            editor.putString("pol", polP);
-                            editor.putInt("tip", tipP);
-                            editor.putString("datum_rodj", btnSetDatumRodj.getText().toString());
-                            editor.putString("datum_d", btnSetDatumDia.getText().toString());
-                            if(podaci.getInt("status",0)==0) {
-                                editor.putString("email", txtSetEmail.getText().toString());
-                            }
-                            editor.commit();
-                        }
-                        else{
-                            Toast.makeText(getContext(), "Email nije validan, ili ostavite prazno polje ili unesite pravilnu email adresu", Toast.LENGTH_LONG).show();
-                        }
-
-                        break;
+                radioMale.setEnabled(true);
+                radioFemale.setEnabled(true);
+                selectTypeDiabetes.setEnabled(true);
+                if(podaci.getInt("status",0) == 0) {
+                    txtSetEmail.setEnabled(true);
                 }
+                btnSetDatumRodj.setEnabled(true);
+                btnSetDatumDia.setEnabled(true);
 
+                btnConf.setEnabled(true);
+                btnCancel.setEnabled(true);
+
+                btnConf.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                btnCancel.setBackgroundColor(getResources().getColor(R.color.colorDanger));
+
+
+                btnGoToUpdateSettings.setVisibility(View.INVISIBLE);
+                imgEdit.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                disableForm();
+            }
+        });
+
+        btnConf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateUserData();
             }
         });
     }
@@ -252,5 +266,44 @@ public class PodesavanjaFragment extends Fragment {
         }
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
         return matcher.find();
+    }
+
+    private void disableForm() {
+        txtSetEmail.setEnabled(false);
+        radioMale.setEnabled(false);
+        radioFemale.setEnabled(false);
+        selectTypeDiabetes.setEnabled(false);
+        btnSetDatumRodj.setEnabled(false);
+        btnSetDatumDia.setEnabled(false);
+    }
+
+    private void updateUserData() {
+        if(validate(txtSetEmail.getText().toString())) {
+            disableForm();
+            String polP;
+            int tipP;
+            if(radioFemale.isChecked()){
+                polP = "Ženski";
+            }
+            else{
+                polP = "Muški";
+            }
+            tipP = selectTypeDiabetes.getSelectedItemPosition();
+
+            editor.putString("pol", polP);
+            editor.putInt("tip", tipP);
+            editor.putString("datum_rodj", btnSetDatumRodj.getText().toString());
+            editor.putString("datum_d", btnSetDatumDia.getText().toString());
+            if(podaci.getInt("status",0)==0) {
+                editor.putString("email", txtSetEmail.getText().toString());
+            }
+            editor.commit();
+            btnGoToUpdateSettings.setVisibility(View.VISIBLE);
+            imgEdit.setVisibility(View.VISIBLE);
+
+        }
+        else{
+            Toast.makeText(getContext(), "Email nije validan, ili ostavite prazno polje ili unesite pravilnu email adresu", Toast.LENGTH_LONG).show();
+        }
     }
 }

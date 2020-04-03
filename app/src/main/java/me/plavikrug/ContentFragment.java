@@ -1,11 +1,14 @@
 package me.plavikrug;
 
-import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +16,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.triggertrap.seekarc.SeekArc;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
+
+import me.plavikrug.db.DataBaseSource;
 
 /**
  * Created by Vuk on 31.7.2017..
@@ -24,14 +31,23 @@ import java.util.Locale;
 
 public class ContentFragment extends Fragment {
     private Button btnAdd;
-    private SeekArc seekArc;
-    private TextView seekArcProgress;
-    private TextView expl;
+    private Button btnSeeJournal;
     private Button pomoc;
+    private TextView lblLastMeasurementResult;
+    private TextView lblLastMeasurementTime;
+    private TextView lblLastMeasurementUnit;
+    private TextView lblInsulinTherapyLast24hResult;
+    private ImageView[] imgWeekDays;
     private DataBaseSource dbSource;
-    Cursor podaciMea;
     int godina, mjesec, dan;
     String danStr, mjesecStr;
+    String TAG = "AJMO_PLAVI";
+    String measurementTime;
+    float lastMeasurement;
+    int lastTherapyTotal;
+    int lastTherapy;
+    int lastCorrection;
+    ArrayList<Integer> weekMeasurementsCount;
 
     @Nullable
     @Override
@@ -43,11 +59,13 @@ public class ContentFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Plavi Krug");
-        btnAdd = (Button) view.findViewById(R.id.add_button);
-        seekArc = (SeekArc) view.findViewById(R.id.seekArc);
-        seekArcProgress = (TextView) view.findViewById(R.id.seekArcProgress);
-        expl = (TextView) view.findViewById(R.id.probaj);
-        pomoc = (Button) view.findViewById(R.id.pomoc);
+        btnAdd = (Button) view.findViewById(R.id.btn_add_measurement);
+        btnSeeJournal = (Button) view.findViewById(R.id.btn_see_journal);
+        lblLastMeasurementResult = (TextView) view.findViewById(R.id.lblLastMeasurementResult);
+        lblLastMeasurementTime = (TextView) view.findViewById(R.id.lblLastMeasurementTime);
+        lblLastMeasurementUnit = (TextView) view.findViewById(R.id.lblLastMeasurementUnit);
+        lblInsulinTherapyLast24hResult = (TextView) view.findViewById(R.id.lblInsulinTherapyLast24hResulr);
+        initializeWeekDays(view);
 
         //Dio za dobijanje danasnjeg dana
         Calendar c = Calendar.getInstance();
@@ -66,33 +84,22 @@ public class ContentFragment extends Fragment {
         }
         //Dio za dobijanje danasnjeg dana
         dbSource = new DataBaseSource(getActivity());
-        dbSource.open();
-        podaciMea = dbSource.getMjerenja(danStr + "." + mjesecStr + "." + godina);
 
-        double[] nivoiGl = new double[podaciMea.getCount()];
-        podaciMea.moveToFirst();
-
-        int j = 0;
-        while(!podaciMea.isAfterLast()){
-            nivoiGl[j] = podaciMea.getDouble(1);
-            j++;
-            podaciMea.moveToNext();
+        // Odavdje krece iyvlacenje podataka u onCreate metodi
+        try {
+            extractLastMeasurementandTherapyFromDb();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            lblLastMeasurementUnit.setText("Nema podataka");
+            lblInsulinTherapyLast24hResult.setText("Nema podataka");
         }
 
-        izracunajPoene(nivoiGl);
-
-
-        ValueAnimator anim = ValueAnimator.ofInt(0, seekArc.getProgress());
-        anim.setDuration(1000);
-        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                int animProgress = (Integer) animation.getAnimatedValue();
-                seekArc.setProgress(animProgress);
-                seekArcProgress.setText(animProgress+"");
+        weekMeasurementsCount = getWeekMeasurements();
+        for(int w = 0; w < weekMeasurementsCount.size(); w++) {
+            if(weekMeasurementsCount.get(w).intValue() > 0) {
+                imgWeekDays[w].setImageDrawable(getResources().getDrawable(R.drawable.ic_green_check));
             }
-        });
-        anim.start();
+        }
 
         btnAdd.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -104,37 +111,138 @@ public class ContentFragment extends Fragment {
             }
         });
 
-
-        pomoc.setOnClickListener(new View.OnClickListener() {
+        btnSeeJournal.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent helpWindow = new Intent(getActivity(), PomocActivity.class);
-                startActivity(helpWindow);
+            public void onClick(View view) {
+                ((GlavnaAktivnost)getActivity()).pokaziOdabranuStvar(R.id.men_dnevnik);
             }
         });
+
+
     }
 
-    public void izracunajPoene( double[] mjerenja){
-        int suma = 0;
-        for(int u = 0; u < mjerenja.length; u++){
-            if(mjerenja[u]>= 4 && mjerenja[u] <= 10){
-                suma += 20;
+    private void initializeWeekDays(View view) {
+        imgWeekDays = new ImageView[7];
+        imgWeekDays[0] = (ImageView) view.findViewById(R.id.img_weekday1);
+        imgWeekDays[1] = (ImageView) view.findViewById(R.id.img_weekday2);
+        imgWeekDays[2] = (ImageView) view.findViewById(R.id.img_weekday3);
+        imgWeekDays[3] = (ImageView) view.findViewById(R.id.img_weekday4);
+        imgWeekDays[4] = (ImageView) view.findViewById(R.id.img_weekday5);
+        imgWeekDays[5] = (ImageView) view.findViewById(R.id.img_weekday6);
+        imgWeekDays[6] = (ImageView) view.findViewById(R.id.img_weekday7);
+    }
+
+    private void extractLastMeasurementandTherapyFromDb() throws ParseException {
+        dbSource.open();
+        Cursor cursor = dbSource.getLastMjerenje();
+        boolean thereIsMeasurementData = cursor.moveToFirst();
+        if(thereIsMeasurementData) {
+            lastMeasurement = cursor.getFloat(3);
+            measurementTime = cursor.getString(1);
+            if(lastMeasurement < 4) {
+                lblLastMeasurementResult.setTextColor(getActivity().getResources().getColor(R.color.hypoColor));
+                lblLastMeasurementResult.setText(lastMeasurement + "");
+            } else if(lastMeasurement >= 10) {
+                lblLastMeasurementResult.setTextColor(getActivity().getResources().getColor(R.color.colorDanger));
+                lblLastMeasurementResult.setText(lastMeasurement + "");
+            } else {
+                lblLastMeasurementResult.setTextColor(getActivity().getResources().getColor(R.color.colorPrimary));
+                lblLastMeasurementResult.setText(lastMeasurement + "");
             }
-            else if(mjerenja[u] > 10 && mjerenja[u] <= 15){
-                suma += 5;
+
+            lblLastMeasurementUnit.setText(getString(R.string.lblBloodSugarMeasurementUnit));
+
+            String strDate = measurementTime.substring(0, 11);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+            Date date = sdf.parse(strDate);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            Calendar today = Calendar.getInstance();
+
+
+            boolean sameDay = today.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR) &&
+                    today.get(Calendar.YEAR) == cal.get(Calendar.YEAR);
+
+            boolean yesterDay = today.get(Calendar.DAY_OF_YEAR) == (cal.get(Calendar.DAY_OF_YEAR) + 1) &&
+                    today.get(Calendar.YEAR) == cal.get(Calendar.YEAR);
+            if(sameDay) {
+                lblLastMeasurementTime.setText("Danas u " + measurementTime.substring(11));
+            } else if (yesterDay) {
+                lblLastMeasurementTime.setText("Juče u " + measurementTime.substring(11));
+            } else {
+                lblLastMeasurementTime.setText(measurementTime);
             }
-            else if(mjerenja[u] > 15){
-                suma -= 5;
-            }
-            else if (mjerenja[u] < 4 && mjerenja[u] >= 2.5){
-                suma += 5;
-            }
-            else if (mjerenja[u]< 2.5){
-                suma -= 5;
-            }
+
+        } else {
+            lblLastMeasurementResult.setTextColor(getActivity().getResources().getColor(R.color.normalText));
+            lblLastMeasurementResult.setText("Nema podataka");
         }
 
-        seekArcProgress.setText(suma+"");
-        seekArc.setProgress(suma);
+        cursor = dbSource.getLastTerapija();
+        boolean thereIsTherapyData = cursor.moveToFirst();
+        if(thereIsTherapyData) {
+            lastTherapy = cursor.getInt(0);
+            lastCorrection = cursor.getInt(1);
+            lastTherapyTotal = lastTherapy + lastCorrection;
+            Spannable spannableTotal = new SpannableString(lastTherapyTotal + "");
+            spannableTotal.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorGreen)),
+                    0, (lastTherapyTotal + "").length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            Spannable spannableRegular = new SpannableString("" + lastTherapy);
+            spannableRegular.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorGreen)),
+                    0, (lastTherapy + "").length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            Spannable spannableCorrection = new SpannableString("" + lastCorrection);
+            spannableCorrection.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorGreen)),
+                    0, (lastCorrection + "").length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            lblInsulinTherapyLast24hResult.setText("");
+            lblInsulinTherapyLast24hResult.append("Ukupno: ");
+            lblInsulinTherapyLast24hResult.append(spannableTotal);
+            lblInsulinTherapyLast24hResult.append(" (Regularno: ");
+            lblInsulinTherapyLast24hResult.append(spannableRegular);
+            lblInsulinTherapyLast24hResult.append(", Korekcija: ");
+            lblInsulinTherapyLast24hResult.append(spannableCorrection);
+            lblInsulinTherapyLast24hResult.append(")");
+        } else {
+            lblInsulinTherapyLast24hResult.setTextColor(getActivity().getResources().getColor(R.color.normalText));
+            lblInsulinTherapyLast24hResult.setText("Nema podataka");
+        }
+
+
+        dbSource.close();
+    }
+
+    private ArrayList<Integer> getWeekMeasurements() {
+        dbSource.open();
+        ArrayList<Integer> measurementsCount = new ArrayList<Integer>();
+        Calendar today = Calendar.getInstance();
+        int currentWeekDay = today.get(Calendar.DAY_OF_WEEK) == 1 ? 7 : today.get(Calendar.DAY_OF_WEEK) - 1;
+        Log.d(TAG, "Dan u nedljelji: " + currentWeekDay);
+        String[] dates = new String[currentWeekDay];
+        Cursor[] cursors = new Cursor[currentWeekDay];
+
+
+        int i = currentWeekDay;
+        int decreaser = 0;
+        while (i > 0) {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            Calendar someDayBefore = Calendar.getInstance();
+            someDayBefore.add(Calendar.DAY_OF_MONTH, decreaser);
+            dates[i-1] = simpleDateFormat.format(someDayBefore.getTime());
+            decreaser--;
+            i--;
+        }
+
+        for(int c = 0; c < dates.length; c++) {
+            cursors[c] = dbSource.getGlMjerenja(dates[c]);
+            if(cursors[c].moveToFirst()) {
+                measurementsCount.add(1);
+            } else {
+                measurementsCount.add(0);
+            }
+        }
+        dbSource.close();
+        return measurementsCount;
     }
 }

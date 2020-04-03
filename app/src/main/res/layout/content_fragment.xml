@@ -1,88 +1,408 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:seekarc="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="9dp"
-    android:layout_alignParentBottom="true">
+    android:background="@color/aquaBlueBackground"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/probaj"
-            android:text="@string/probaj"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="5dp"
-            android:textSize="18sp"
-            />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:background="@color/subColor"
-            android:id="@+id/pomoc"
-            android:padding="5dp"
-            android:text="@string/pomoc"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            />
-
-
-        <FrameLayout
-            android:id="@+id/seekArcContainer"
+        <LinearLayout
+            android:id="@+id/lay_top_blue"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" >
+            android:layout_height="80dp"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.triggertrap.seekarc.SeekArc
-            android:id="@+id/seekArc"
-            android:layout_width="match_parent"
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_centerInParent="true"
-            android:padding="30dp"
-            seekarc:startAngle="0"
-            seekarc:sweepAngle="360"
-            seekarc:arcWidth="20dp"
-            seekarc:progressColor="@color/colorPrimary"
-            seekarc:progressWidth="20dp"
-            seekarc:progress="0"
-            seekarc:enabled="false"
-            seekarc:touchInside="true"
-            />
+            android:id="@+id/lay_first_box"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_box"
+            android:padding="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/lay_top_blue"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="40dp"
+            android:clipToPadding="false"
+            android:elevation="8dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/normalText"
+                android:fontFamily="@font/segoeuib"
+                android:text="@string/lblLastMeasurement"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                >
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_blood_sample"
+                    android:contentDescription="@string/measurementDescription"
+                    />
 
                 <TextView
-                    android:id="@+id/seekArcProgress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="64"
-                    android:textSize="40sp" />
+                    android:id="@+id/lblLastMeasurementResult"
+                    android:fontFamily="@font/segoeuib"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/normalText"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lblLastMeasurementUnit"
+                    android:fontFamily="@font/segoeuib"
+                    android:textSize="16sp"
+                    android:textColor="@color/normalText"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    />
 
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginStart="32dp"
+                    >
 
-        </FrameLayout>
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_clock"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/lblMeasurementTime"
+                        />
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lblLastMeasurementTime"
+                        android:fontFamily="@font/segoeuib"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginStart="4dp"
+                        android:textSize="16sp"
+                        android:textColor="@color/normalText"
+                        android:text=""
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/segoeuib"
+                android:textSize="16sp"
+                android:textColor="@color/normalText"
+                android:layout_marginTop="10dp"
+                android:text="@string/lblInsulinTherapyLast24h"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lblInsulinTherapyLast24hResulr"
+                android:fontFamily="@font/segoeuib"
+                android:textSize="16sp"
+                android:textColor="@color/normalText"
+                android:layout_marginTop="10dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/lay_second_box"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_box"
+            android:padding="16dp"
+            android:elevation="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintTop_toBottomOf="@id/lay_first_box"
+            android:layout_marginTop="20dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="horizontal"
+                android:baselineAligned="false"
+                android:weightSum="70">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/segoeuib"
+                        android:text="@string/lblCheckPon"
+                        android:textColor="@color/normalText"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/img_weekday1"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/ic_circle_dashed" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/segoeuib"
+                        android:text="@string/lblCheckUto"
+                        android:textColor="@color/normalText"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/img_weekday2"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/ic_circle_dashed" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/segoeuib"
+                        android:text="@string/lblCheckSri"
+                        android:textColor="@color/normalText"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/img_weekday3"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/ic_circle_dashed" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/segoeuib"
+                        android:text="@string/lblCheckČet"
+                        android:textColor="@color/normalText"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/img_weekday4"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/ic_circle_dashed" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/segoeuib"
+                        android:text="@string/lblCheckPet"
+                        android:textColor="@color/normalText"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/img_weekday5"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/ic_circle_dashed" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/segoeuib"
+                        android:text="@string/lblCheckSub"
+                        android:textColor="@color/normalText"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/img_weekday6"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/ic_circle_dashed" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/segoeuib"
+                        android:text="@string/lblCheckNeđ"
+                        android:textColor="@color/normalText"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/img_weekday7"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/ic_circle_dashed" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/segoeuib"
+                        android:text="@string/lblCheckPon"
+                        android:textColor="@color/normalText"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/ic_circle_dashed" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/lbl_weekdays_img_explanation"
+                android:fontFamily="@font/segoeuil"
+                android:textSize="12sp"
+                android:textColor="@color/normalText"
+                android:text="@string/lbl_weekdays_img_explanation"
+                />
+
+            <Button
+                android:id="@+id/btn_see_journal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:fontFamily="@font/segoeuibl"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:text="@string/btn_see_journal"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
 
         <Button
-            android:id="@+id/add_button"
-            android:layout_width="160dp"
+            android:id="@+id/btn_add_measurement"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/zaob_dugme"
-            android:drawableLeft="@mipmap/ic_adder"
-            android:paddingLeft="2dp"
-            android:paddingTop="2dp"
-            android:paddingRight="2dp"
-            android:paddingBottom="5dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/colorGreen"
+            android:fontFamily="@font/segoeuibl"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="@string/btn_add_measurement"
+            android:textAlignment="center"
             android:textColor="@color/colorWhite"
-            android:text="Dodaj rezultat mjerenja"
-            android:textAllCaps="false"
-            android:textSize="20dp"
-            android:layout_alignParentBottom="true"
-            android:singleLine="false"
-            />
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lay_second_box" />
 
-</RelativeLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

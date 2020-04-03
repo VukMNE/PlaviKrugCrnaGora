@@ -2,6 +2,8 @@ package me.plavikrug;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -40,7 +43,7 @@ public class GlavnaAktivnost extends AppCompatActivity
             /*
              * Ako jeste prvo pokretanje, onda povedi korisnika na stranicu đe treba da ostavi lične podatke
              */
-            startActivity(new Intent(GlavnaAktivnost.this, PrviPut.class));
+            startActivity(new Intent(GlavnaAktivnost.this, RegisterActivity.class));
             finish();
 
         }
@@ -81,6 +84,23 @@ public class GlavnaAktivnost extends AppCompatActivity
                 pokaziOdabranuStvar(savedInstanceState.getInt("idFragment"));
             }
         }
+
+        try {
+            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            String versionName = pInfo.versionName;
+            int versionCode = pInfo.versionCode;
+            boolean version15AdjustmentDone = podaci.getBoolean("version15AdjustmentDone", false);
+
+            if(versionCode >= 15 && !version15AdjustmentDone) {
+                SharedPreferences.Editor editor = podaci.edit();
+                editor.putString("vCode", "");
+                editor.putInt("status", 0);
+                editor.putBoolean("version15AdjustmentDone", true);
+                editor.commit();
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -109,7 +129,7 @@ public class GlavnaAktivnost extends AppCompatActivity
     }
 
     //Mapiranje gdje vodi koje dugme sa glavnog menija
-    private void pokaziOdabranuStvar(int id){
+    public void pokaziOdabranuStvar(int id){
         Fragment fragment = null;
         String strFragment = "";
 
@@ -133,11 +153,6 @@ public class GlavnaAktivnost extends AppCompatActivity
                 fragment = new DnevnikFragment();
                 strFragment = "fragment_dnevnik";
                 idFragment = R.id.men_dnevnik;
-                break;
-            case R.id.men_calendar:
-                fragment = new KalendarFragment();
-                strFragment = "moj_kalendar";
-                idFragment = R.id.men_calendar;
                 break;
             case R.id.men_backup:
                 Intent i = new Intent(GlavnaAktivnost.this, BackUpActivity.class);

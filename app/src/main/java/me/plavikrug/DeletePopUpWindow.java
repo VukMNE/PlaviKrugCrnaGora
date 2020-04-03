@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import me.plavikrug.db.DataBaseSource;
+
 public class DeletePopUpWindow extends Activity {
     TextView dltMessage;
     Button btnDoDelete;

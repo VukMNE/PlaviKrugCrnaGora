@@ -2,190 +2,296 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@color/aquaBlueBackground"
+    >
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context="me.plavikrug.DodajMjerenje"
-        android:id="@+id/activity_dodaj_mjerenje"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="10dp"
+        android:layout_height="wrap_content"
+
         >
 
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                >
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp"
-                    android:textColor="@color/colorBlack"
-                    android:background="@drawable/polu_kv_left"
-                    android:padding="6dp"
-                    android:drawableLeft="@mipmap/ic_datum"
-                    android:layout_alignParentLeft="true"
-                    android:id="@+id/btn_datum"
-                    />
-                <Button
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:textSize="18dp"
-                 android:textColor="@color/colorBlack"
-                 android:background="@drawable/polu_kv_right"
-                 android:text="@string/vrijeme"
-                 android:padding="6dp"
-                 android:drawableRight="@mipmap/ic_vrijeme"
-                 android:layout_alignParentRight="true"
-                 android:id="@+id/btn_vrijeme"
-                 />
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:padding="5dp"
-                    android:textColor="@color/colorPrimary"
-                    android:id="@+id/txtSecer"
-                    android:text="@string/nivo_secera"
-                    />
-                <EditText
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="25dp"
-                    android:id="@+id/gl_measure"
-                    android:inputType="numberDecimal"
-                    android:maxLength="5"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="10dp"
-                    android:textAllCaps="false"
-                    android:text="@string/mjera_gl"
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/lbl_tip_mjer"
-                    android:text="@string/tip_mjer"
-                    android:textSize="20dp"
-                    />
-
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/spinner">
-
-                </Spinner>
-
-
-
-            </LinearLayout>
-
-        <LinearLayout
+        <android.support.constraint.Guideline
+            android:layout_width="0dp"
+            android:id="@+id/add_mjer_vertical_guideline"
+            android:layout_height="match_parent"
             android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"/>
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txt_insulin"
-                    android:id="@+id/lbl_insulin"
-                    android:textSize="18dp"
-                    />
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:textSize="18dp"
-                    android:id="@+id/txt_insulin"
-                    android:maxLength="2"
-                    />
-            </LinearLayout>
+            android:padding="2dp"
+            android:background="@color/colorPrimaryDark"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp"
+            android:id="@+id/lbl_add_mjer_title"
+            android:text="@string/lbl_add_mjer_title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/lbl_korekcija"
-                    android:id="@+id/lbl_korekcija"
-                    android:textSize="18dp"
-                    />
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:textSize="18dp"
-                    android:id="@+id/txt_korekcija"
-                    android:maxLength="2"
-                    />
-            </LinearLayout>
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:id="@+id/img_add_mjer_datum"
+            app:layout_constraintTop_toBottomOf="@id/lbl_add_mjer_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:src="@drawable/ic_calendar"
+            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="@string/datum"
+            />
 
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/pozicije"
-                android:id="@+id/img_pozicija"
-                android:layout_gravity="center"
-                />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lbl_add_mjer_datum"
+            android:text="@string/datum"
+            android:textSize="12sp"
+            android:textColor="@color/labelTextColor"
+            android:fontFamily="@font/segoeuisb"
+            app:layout_constraintTop_toTopOf="@id/img_add_mjer_datum"
+            app:layout_constraintBottom_toBottomOf="@id/img_add_mjer_datum"
+            app:layout_constraintLeft_toRightOf="@id/img_add_mjer_datum"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_submit"
-                android:id="@+id/btn_submit"
-                />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_datum"
+            android:textSize="20sp"
+            android:textAlignment="viewStart"
+            android:layout_gravity="start"
+            android:textColor="@color/normalText"
+            android:paddingLeft="4dp"
+            android:background="@drawable/button_like_textfield"
+            app:layout_constraintLeft_toLeftOf="@id/img_add_mjer_datum"
+            app:layout_constraintTop_toBottomOf="@id/lbl_add_mjer_datum"
+            app:layout_constraintRight_toLeftOf="@id/add_mjer_vertical_guideline"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="12dp"
+            />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/deleteMjerenje"
-                android:text="@string/delete"
-                android:visibility="gone"
-                android:drawableBottom="@mipmap/deleteimg"/>
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:id="@+id/img_add_mjer_vrijeme"
+            android:src="@drawable/ic_clock"
+            app:layout_constraintTop_toBottomOf="@id/lbl_add_mjer_title"
+            app:layout_constraintLeft_toRightOf="@id/add_mjer_vertical_guideline"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="@string/vrijeme"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lbl_add_mjer_vrijeme"
+            android:text="@string/vrijeme"
+            android:textSize="12sp"
+            android:textColor="@color/labelTextColor"
+            android:fontFamily="@font/segoeuisb"
+            app:layout_constraintTop_toTopOf="@id/img_add_mjer_vrijeme"
+            app:layout_constraintBottom_toBottomOf="@id/img_add_mjer_vrijeme"
+            app:layout_constraintLeft_toRightOf="@id/img_add_mjer_vrijeme"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_vrijeme"
+            android:textSize="20sp"
+            android:textAlignment="viewStart"
+            android:layout_gravity="start"
+            android:textColor="@color/normalText"
+            android:paddingLeft="4dp"
+            android:background="@drawable/button_like_textfield"
+            app:layout_constraintLeft_toLeftOf="@id/img_add_mjer_vrijeme"
+            app:layout_constraintTop_toBottomOf="@id/lbl_add_mjer_vrijeme"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="24dp"
+            />
 
 
-        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtSecer"
+            android:textSize="12sp"
+            android:textColor="@color/labelTextColor"
+            android:fontFamily="@font/segoeuisb"
+            android:text="@string/nivo_secera"
+            app:layout_constraintLeft_toLeftOf="@id/img_add_mjer_datum"
+            app:layout_constraintTop_toBottomOf="@id/btn_datum"
+            android:layout_marginTop="24dp"
+            />
 
-</LinearLayout>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:id="@+id/gl_measure"
+            android:inputType="numberDecimal"
+            android:maxLength="5"
+            app:layout_constraintLeft_toLeftOf="@id/img_add_mjer_datum"
+            app:layout_constraintRight_toRightOf="@id/btn_vrijeme"
+            app:layout_constraintTop_toBottomOf="@id/txtSecer"
+            android:layout_marginTop="4dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lbl_tip_mjer"
+            android:textSize="12sp"
+            android:textColor="@color/labelTextColor"
+            android:fontFamily="@font/segoeuisb"
+            android:text="@string/tip_mjer"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/gl_measure"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            />
+
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+            app:layout_constraintLeft_toLeftOf="@id/lbl_tip_mjer"
+            app:layout_constraintTop_toBottomOf="@id/lbl_tip_mjer"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="24dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_insulin"
+            android:id="@+id/lbl_insulin"
+            android:textSize="12sp"
+            android:textColor="@color/labelTextColor"
+            android:fontFamily="@font/segoeuisb"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textSize="20dp"
+            android:id="@+id/txt_insulin"
+            android:maxLength="2"
+            app:layout_constraintLeft_toLeftOf="@id/lbl_insulin"
+            app:layout_constraintTop_toBottomOf="@id/lbl_insulin"
+            app:layout_constraintRight_toLeftOf="@id/add_mjer_vertical_guideline"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="12dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_korekcija"
+            android:id="@+id/lbl_korekcija"
+            android:textSize="12sp"
+            android:textColor="@color/labelTextColor"
+            android:fontFamily="@font/segoeuisb"
+            app:layout_constraintLeft_toLeftOf="@id/add_mjer_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@id/spinner"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="24dp"
+            />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textSize="20dp"
+            android:id="@+id/txt_korekcija"
+            android:maxLength="2"
+            app:layout_constraintLeft_toLeftOf="@id/lbl_korekcija"
+            app:layout_constraintTop_toBottomOf="@id/lbl_korekcija"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="24dp"
+            />
+
+
+        <ImageView
+            android:id="@+id/img_pozicija"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/pozicije"
+            android:scaleType="fitXY"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_insulin"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_submit"
+            android:background="@color/colorGreen"
+            android:textSize="18sp"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/segoeuib"
+            android:text="@string/btn_submit"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_pozicija"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="24dp"
+            />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/deleteMjerenje"
+            android:visibility="gone"
+            android:background="@color/colorDanger"
+            android:textSize="18sp"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/segoeuib"
+            android:text="@string/delete"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_submit"
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+
 
 </ScrollView>

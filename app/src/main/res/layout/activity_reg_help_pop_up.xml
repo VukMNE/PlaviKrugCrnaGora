@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rounded_box"
+    android:theme="@style/AppTheme.PopUpWindow.NoTitle"
+    tools:context=".RegHelpPopUpActivity">
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/lbl_reg_help_title"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="@string/lbl_reg_help_title"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textColor="@color/labelTextColor"
+        android:fontFamily="@font/segoeuisb"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/lbl_reg_help_desc"
+        android:text="@string/lbl_reg_help_desc"
+        android:textSize="18sp"
+        android:textColor="@color/normalText"
+        android:fontFamily="@font/segoeui"
+        app:layout_constraintTop_toBottomOf="@id/lbl_reg_help_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        />
+
+</android.support.constraint.ConstraintLayout>

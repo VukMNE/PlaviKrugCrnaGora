@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1976d2</color>
-    <color name="colorPrimaryDark">#004ba0</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#75A5D7</color>
+    <color name="colorPrimaryDark">#4376A5</color>
+    <color name="colorAccent">#4376A5</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="aquaBlueBackground">#EDF5F6</color>
+    <color name="normalText">#707070</color>
+    <color name="labelTextColor">#303030</color>
+    <color name="colorGreen">#75AD57</color>
+    <color name="colorDanger">#A30B37</color>
+
+
+
+    <!-- Pitanje je da li ćemo koristiti boje ispod ovog komentara !-->
     <color name="blue">#0000FF</color>
     <color name="colorLightGrey">#F5F5F6</color>
     <color name="fino_zuta">#FFD11A</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorGrey">#a1a4a8</color>
     <color name="colorSkyBlue">#0088cc</color>
     <color name="colorPrimarySvjetlija">#5F73D7</color>
     <color name="subColor">#5e92f3</color>
-    <color name="colorGreen">#01aa26</color>
+    <color name="colorGrey">#a1a1a1</color>
     <color name="colorTransparent">#00FFFFFF</color>
     <color name="colorTabBackground">#63a4ff</color>
     <color name="colorLightYellow">#ffff68</color>
@@ -20,7 +28,7 @@
     <color name="colorGreenMiddle">#19d276</color>
     <color name="colorGreenFinal">#009f49</color>
     <color name="colorRed">#ff0000</color>
-    <color name="colorOrange">#ffa500</color>
+    <color name="hypoColor">#ffa500</color>
     <color name="colorTabBackgroundLight">#85c6ff</color>
     <color name="colorInsulin">#AAEE70</color>
 </resources>

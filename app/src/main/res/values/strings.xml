@@ -1,12 +1,15 @@
 <resources>
     <string name="app_name">Plavi Krug</string>
+    <string name="app_name_full">Plavi Krug Crna Gora</string>
     <string name="ime">Ime</string>
     <string name="prezime">Prezime</string>
-    <string name="pol">Pol</string>
-    <string name="tip">Dijabetes</string>
+    <string name="lbl_gender">Pol</string>
+    <string name="gender_male">Muški</string>
+    <string name="gender_female">Ženski</string>
+    <string name="tip_diabetes">Tip dijabetesa</string>
     <string name="open">Otvori</string>
     <string name="close">Zatvori</string>
-    <string name="nivo_secera">Nivo šećera u krvi</string>
+    <string name="nivo_secera">Nivo šećera u krvi (mmol/L)</string>
     <string name="mjera_gl">mmol/L</string>
     <string name="vrijeme">Vrijeme: </string>
     <string name="tip_mjer">Tip Mjerenja</string>
@@ -44,9 +47,8 @@
         <item>Tokom spavanja</item>
         <item>Prije vježbi</item>
         <item>Poslije vježbi</item>
-
-
     </string-array>
+
     <string name="title_activity_glavna_aktivnost">Plavi Krug</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -67,7 +69,7 @@
     <string name="btnDoBackUp">Preuzmi podatke</string>
     <string name="lblCouldntFindEmail">Da biste napravili siguronosnu kopiju Vaših podataka neophodno je da ostavite Vašu mail adresu, kako bismo Vam mogli poslati uputstva i jedinstvenu šifru za preuzimanje podataka u slučaju kvara ili gubitka telefona.</string>
     <string name="btnSubmitSetEmail">Potvrdi</string>
-    <string name="lbl_set_email">Email</string>
+    <string name="lbl_email">Email</string>
     <string name="lblBackUpInProgress">Molimo sačekajte, dok se ne napravi kopija podataka</string>
     <string name="lblBackUpCodeText">Unesite siguronosni kod koji smo poslali na Vašu email adresu, kako biste potvrdili da je to Vaša adresa</string>
     <string name="lblHintBackUpCode">Sigurni kod</string>
@@ -122,5 +124,60 @@
     <string name="txtHintMjesec">MM</string>
     <string name="txtHintGodina">GGGG</string>
     <string name="btnPokreniIzvjestaj">Pokreni izvještaj</string>
+
+    <string name="lblLastMeasurement">Posljednje mjerenje</string>
+    <string name="lblBloodSugarMeasurementUnit">mmol/L</string>
+    <string name="lblInsulinTherapyLast24h">Insulinska terapija u posljednjih 24h</string>
+    <string name="measurementDescription">Nivo šećera u krvi</string>
+    <string name="lblMeasurementTime">Vrijeme mjerenja</string>
+    <string name="lbl_weekdays_img_explanation">* štrikovi pokazuju da postoji makar jedno mjerenje za određeni dan</string>
+    <string name="btn_see_journal">Vidi kompletan dnevnik</string>
+    <string name="btn_add_measurement">Unesi novo mjerenje</string>
+    <string name="register_form">Forma za prijavu</string>
+    <string name="btn_confirm">Potvrdi</string>
+    <string name="btn_skip">Preskoči</string>
+    <string name="lbl_why_reg_data">Zbog čega su potrebni ovi podaci</string>
+    <string name="lbl_reg_help_title">Zbog čega su potrebni ovi podaci?</string>
+    <string name="gender_not_chosen">Nijeste označili pol</string>
+
+    <string name="datum">Datum</string>
+    <string name="lbl_add_mjer_title">Unos mjerenja</string>
+    <string name="lbl_hba1c_list_title1">Sačuvani testovi (HbA1c)</string>
+    <string name="lbl_hba1c_list_title2">HbA1c Test</string>
+    <string name="result_dots">Rezultat:</string>
+    <string name="result">Rezultat</string>
+    <string name="edit">Izmijeni</string>
+    <string name="lbl_insert_data_form">Forma za unos podataka</string>
+    <string name="cancel">Odustani</string>
+    <string name="lblNoDataHba1C">Nema sačuvanih podataka za HbA1c testove.</string>
+    <string name="lbl_hba1c_desc_title">Više o HbA1C Testu</string>
+    <string name="lbl_hba1c_desc_source">(Preuzeto sa: http://www.domzdravljabar.com)</string>
+    <string name="lbl_hba1c_desc">Sastavni dio krvi su crvena krvna zrnca tj. eritrociti. Njihov sastavni dio je bjelančevina hemoglobin. Glukoza koja se u dužem vremenskom periodu nalazi u višku u krvi lijepi se na ovu bjelančevinu i nastaje glikozilirani hemoglobin – HbA1c. Što se u krvi nalazi više glukoze biće i više glikoziliranog hemogobina.\n\n
+    Životni vijek eritrocita je 120 dana nakon čega stari budu zanjenjeni novim. Mjerenjem koncentracije HbA1c može da se utvrdi koja je bila prosječna koncentracija glukoze u krvi u zadnjih 8-12 nedjelja. Kod osoba bez diabetesa prosječne vrijednosti kreću se u rasponu od 3,5% do 5,5% a kod osoba sa diabetesom vrijednosti oo 6,5 do 7,5% smatraju se zadovoljavajućim.\n\n
+    HbA1c test trenutno je najbolji način da se diabetes drži pod kontrolom. Kada je HbA1c 7% prosječna vrijednost šećera u krvi je 6,5mmol/l. Ovo objašnjavaju i ova dva dijagrama.\n\n
+    Kada treba mjeriti HbA1c?\n\n
+    Vrijednosti glikoziliranog hemoglobina treba određivati svakih 6 mjeseci ukoliko je vaš dijabetes dobro regulisan i stabilan a svaka 3 mjeseca ukoliko nije stabilan i dobro izregulisan.\n\n
+    Stanje ukupnog zdravlja osobe sa dijabetesom značajno utiče na vrijednosti HbA1c bez obzira da li redovno uzima terapiju i vodi računa o ishrani i fizičkoj akfivnosti.\n\n
+    Nivo glukoze u krvi mjenja se iz sata u sat i iz dana u dan. Kod osoba sa dijabetesom nivo glukoze u krvi može da poraste više nego obično poslije jela, posebno poslije slatkiša ili da padne poslije fizičke aktivnosti, pa ga je teško držati pod kontrolom. Redovno praćenje nivoa glukoze u krvi najbolji je vodič za ljekara i pacijenta za njeno dovođenje u poželjne okvire.  \n\n
+    Nivo HbA1c je u direktnoj vezi sa rizikom za razvoja svih komplikacija dijabetesa. Smanjenje vrijednosti HbA1c za 1% dovodi do:\n\n
+    &#8226; smanjenja rizika od nastanka svih komplikacija za 21%\n\n
+    &#8226; smanjenja rizika od smrtnog ishoda izazvanog dijabetesom za čak 21% \n\n
+    &#8226; pada rizika od nastanka infarkta srca za 14%\n\n
+    &#8226; smanjenja učestalosti mikrovaskularnih komplikacija (neuropatije, otkazivanja rada bubrega i oštećenja vida) za čak 37% . \n\n
+    </string>
+    <string name="lbl_settings">Podešavanja</string>
+
+    <string name="lbl_reg_help_desc">Vaša email adresa je neophodna, kako bi u slučaju da iz bilo kojeg razloga promijenite telefon, bilo moguće da iskopirate podatke iz ove aplikacije sa starog telefona.\n\n
+    Što se tiče ostalih podataka iz forme za registraciju (pol, tip dijabetesa, datum rođenja..) oni nisu obavezni, i tu su prvenstveno zbog vođenja interne statistike, i ni u jednom trenutku neće biti podijeljeni trećem licu.
+    </string>
+    <string name="lbl_hba1c_sufix">%</string>
+
+    <string-array name="arr_diabetes_types">
+        <item>Tip 1</item>
+        <item>Tip 2</item>
+        <item>Gestacijski dijabetes</item>
+        <item>Nemam dijabetes</item>
+    </string-array>
+
 
 </resources>

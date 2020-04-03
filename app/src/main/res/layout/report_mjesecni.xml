@@ -106,7 +106,7 @@
         app:layout_constraintTop_toBottomOf="@id/lblMaks"
         app:layout_constraintLeft_toLeftOf="@id/lblPodnaslovMjerenja"
         android:text="@string/lblMin"
-        android:textColor="@color/colorOrange"
+        android:textColor="@color/hypoColor"
         />
 
     <TextView

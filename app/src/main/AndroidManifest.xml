@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="me.plavikrug">
-
     <!--
     ><uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" /><!
@@ -13,7 +12,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
 
     <application
         android:allowBackup="true"
@@ -29,7 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PrviPut" />
+        <activity
+            android:name=".RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".DodajMjerenje"
             android:parentActivityName=".GlavnaAktivnost"
@@ -39,7 +39,6 @@
             android:label="@string/title_activity_glavna_aktivnost"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".HbA1cInsert" />
         <activity
             android:name=".DeletePopUpWindow"
             android:theme="@style/AppTheme.PopUpWindow" />
@@ -47,21 +46,24 @@
             android:name=".EditPopUpWindow"
             android:theme="@style/AppTheme.PopUpWindow2" />
         <activity
-            android:name=".PomocActivity"
+            android:name=".PDFReportPopUpWindow"
             android:theme="@style/AppTheme.PopUpWindow" />
         <activity
-            android:name=".PDFReportPopUpWindow"
-            android:theme="@style/AppTheme.PopUpWindow"/>
-
-        <activity android:name=".BackUpActivity" />
+            android:name=".BackUpActivity"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".SetEmailPopUpWindow"
             android:theme="@style/AppTheme.PopUpWindow" />
-        <activity android:name=".DoBackUp"
-            android:theme="@style/AppTheme.PopUpWindowNoClose"
-            android:parentActivityName=".GlavnaAktivnost"/>
-        <activity android:name=".VerifyEmail"
-            android:theme="@style/AppTheme.PopUpWindow"/>
+        <activity
+            android:name=".DoBackUp"
+            android:parentActivityName=".GlavnaAktivnost"
+            android:theme="@style/AppTheme.PopUpWindowNoClose" />
+        <activity
+            android:name=".VerifyEmail"
+            android:theme="@style/AppTheme.PopUpWindow" />
+
+        <activity android:name=".RegHelpPopUpActivity"
+            android:theme="@style/AppTheme.PopUpWindow.NoTitle"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -70,7 +72,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
     </application>
 

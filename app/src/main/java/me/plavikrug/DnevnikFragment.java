@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import me.plavikrug.adapters.DanDnevnikAdapter;
+import me.plavikrug.db.DataBaseSource;
 import me.plavikrug.model.DanDnevnik;
 
 /**

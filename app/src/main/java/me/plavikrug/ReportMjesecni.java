@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +23,8 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.Calendar;
 import java.util.Locale;
+
+import me.plavikrug.db.DataBaseSource;
 
 /**
  * Created by Vuk on 21.1.2018..
@@ -94,7 +95,7 @@ public class ReportMjesecni extends Fragment {
         avgLine.setDrawAsPath(true);
         avgLine.setCustomPaint(paint);
         avgLine.setDataPointsRadius(10);
-        minLine.setColor(getResources().getColor(R.color.colorOrange));
+        minLine.setColor(getResources().getColor(R.color.hypoColor));
         maxLine.setColor(getResources().getColor(R.color.colorRed));
 
         avgLine.setTitle(getResources().getString(R.string.lblProsjek));
